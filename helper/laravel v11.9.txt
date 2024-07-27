@@ -1,1 +1,35 @@
+1. install laravel
+------------------------------------------------------------------------------------------------------------
 composer create-project laravel/laravel laravel-app
+------------------------------------------------------------------------------------------------------------
+2. install Laravel Breeze Auth
+------------------------------------------------------------------------------------------------------------
+composer require laravel/breeze --dev
+php artisan breeze:install
+blade + no + 1 + enter
+------------------------------------------------------------------------------------------------------------
+3. api install
+------------------------------------------------------------------------------------------------------------
+php artisan install:api
+------------------------------------------------------------------------------------------------------------
+5. app\Models\User.php
+------------------------------------------------------------------------------------------------------------
+use Laravel\Sanctum\HasApiTokens;
+class User extends Authenticatable
+{
+    use HasApiTokens;
+}
+------------------------------------------------------------------------------------------------------------
+6. routes\api.php
+------------------------------------------------------------------------------------------------------------
+use App\Http\Controllers\SanctumController;
+
+//auth route
+Route::post("/register", [SanctumController::class, 'register']);
+Route::post("/login", [SanctumController::class, 'login']);
+Route::post("/logout", [SanctumController::class, 'logout'])->middleware('auth:sanctum');
+
+//profile
+Route::post("/profile/image/{id}", [SanctumController::class, 'profilePhoto'])->middleware('auth:sanctum');
+------------------------------------------------------------------------------------------------------------
+7. app\Http\Controllers\SanctumController.php
