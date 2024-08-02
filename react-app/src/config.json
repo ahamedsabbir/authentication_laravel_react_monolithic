@@ -1,0 +1,21 @@
+{
+	"db": {
+		"host": "localhost",
+		"user": "root",
+		"pass": "root",
+		"database": "login_register",
+		"port": 3306
+	},
+	"jwt": {
+		"secret": "secretkey"
+	},
+	"mail": {
+		"host": "smtp.gmail.com",
+		"port": 587,
+		"secure": false,
+		"auth": {
+			"user": "your_email@gmail.com",
+			"pass": "your_password"
+		}
+	}
+}

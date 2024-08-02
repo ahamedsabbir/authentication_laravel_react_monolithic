@@ -1,29 +1,25 @@
 // Constants
-const AUTH_STATE = {
-    user: localStorage.getItem('user') || null,
-    token: localStorage.getItem('token') || null,
-    role: localStorage.getItem('role') || null,
-    auth: localStorage.getItem('auth') || false
-};
-
+const AUTH_STATE = JSON.parse(localStorage.getItem('auth_data')) || {};
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
 const LOGOUT = 'LOGOUT';
 const UPDATE = 'UPDATE';
 
 // Action Creators
-export const login = (user, token) => ({
+export const login = (data) => ({
     type: LOGIN,
-    payload: { user, token }
+    payload: { data }
 });
-
 export const logout = () => ({
     type: LOGOUT
 });
-
-export const update = (user) => ({
+export const register = (data) => ({
+    type: REGISTER,
+    payload: { data }
+});
+export const update = (data) => ({
     type: UPDATE,
-    payload: user
+    payload: { data }
 });
 
 // Reducer
@@ -32,26 +28,38 @@ export const reduxAuth = (state = AUTH_STATE, action) => {
         case LOGIN:
             return {
                 ...state,
-                user: action.payload.user,
-                token: action.payload.token,
-                role: action.payload.role,
-                auth: action.payload.auth
+                id: action.payload.data.id,
+                user: action.payload.data.user,
+                token: action.payload.data.token,
+                role: action.payload.data.role,
+                auth: action.payload.data.auth
             };
         case LOGOUT:
             return {
                 ...state,
+                id: null,
                 user: null,
                 token: null,
                 role: null,
                 auth: null,
             };
+        case REGISTER:
+            return {
+                ...state,
+                id: action.payload.data.id,
+                user: action.payload.data.user,
+                token: action.payload.data.token,
+                role: action.payload.data.role,
+                auth: action.payload.data.auth
+            };
         case UPDATE:
             return {
                 ...state,
-                user: action.payload.user,
-                token: action.payload.token,
-                role: action.payload.role,
-                auth: action.payload.auth
+                id: action.payload.data.id,
+                user: action.payload.data.user,
+                token: action.payload.data.token,
+                role: action.payload.data.role,
+                auth: action.payload.data.auth
             };
         default:
             return state;

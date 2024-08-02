@@ -55,6 +55,14 @@ class SanctumController extends Controller
             'msg' => "logout"
         ]);
     }
+	public function profile($id)
+    {
+		$user = User::find($id);
+		return response()->json([
+            'user' => $user,
+            'msg' => "202"
+        ]);
+	}
 	public function profilePhoto(Request $request, $id)
     {
 		$user = User::find($id);

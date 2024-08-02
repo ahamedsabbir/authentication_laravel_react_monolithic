@@ -16,4 +16,5 @@ Route::post("/login", [SanctumController::class, 'login']);
 Route::post("/logout", [SanctumController::class, 'logout'])->middleware('auth:sanctum');
 
 //profile
+Route::get("/profile/{id}", [SanctumController::class, 'profile'])->middleware('auth:sanctum');
 Route::post("/profile/image/{id}", [SanctumController::class, 'profilePhoto'])->middleware('auth:sanctum');

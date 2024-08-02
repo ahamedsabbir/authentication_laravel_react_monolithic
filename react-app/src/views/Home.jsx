@@ -6,7 +6,7 @@ function Home() {
   const authState = useSelector(state => state.authentication.user)
   const dispatch = useDispatch();
   const loginHandel = () => {
-    dispatch(login("kamal", "hdiufrwhfdsdfeiu84759"));
+    dispatch(login({user: "kamal", role: "admin", auth: true, token: "12345"}));
   }
   const logoutHandel = () => {
     dispatch(logout());
