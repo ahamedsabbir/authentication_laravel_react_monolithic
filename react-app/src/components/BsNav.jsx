@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../reducers/reduxAuth';
+
 function BsNav() {
+  const [categories, setCategories] = useState([]);
   const authState = useSelector(state => state.authentication)
   const dispatch = useDispatch();
   const logoutHandel = (e) => {
@@ -12,6 +15,18 @@ function BsNav() {
       window.location.href = '/login';
     }, 1000);
   }
+  const getCategories = async () => {
+    try {
+      axios.defaults.baseURL = "http://localhost/authentication_laravel_react_monolithic/laravel-app/public/api"
+      const response = await axios.get('/categories');
+      setCategories(response.data.categories);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  }
+  useEffect(() => {
+    getCategories();
+  }, []);
   return (
     <div className="">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -26,7 +41,19 @@ function BsNav() {
                 <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/counter">Counter</NavLink>
+                <NavLink className="nav-link" aria-current="page" to="/products">Products</NavLink>
+              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Category
+                </a>
+                <ul className="dropdown-menu">
+                  {categories.map((category) => (
+                    <li className="nav-item" key={category.id}>
+                      <NavLink className="nav-link" aria-current="page" to={"/products/category/"+category.id}>{category.name}</NavLink>
+                    </li>
+                  ))}
+                </ul>
               </li>
             </ul>
             <ul className='d-flex navbar-nav'>

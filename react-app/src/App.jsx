@@ -12,6 +12,8 @@ import Login from './views/Login';
 import Register from './views/Register';
 import Dashboard from './views/Dashboard';
 import Profile from './views/Profile';
+import Products from './views/Products';
+import Product from './views/Product';
 function App() {
   useEffect(() => {
     //toast.success('Well done!');
@@ -28,6 +30,9 @@ function App() {
           <Route path='/register' Component={Register} />
           <Route path='/dashboard' Component={Dashboard} />
           <Route path='/profile' Component={Profile} />
+          <Route path='/products' Component={Products} />
+          <Route path='/products/category/:id' Component={Products} />
+          <Route path='/product/:id' Component={Product} />
           <Route path='*' Component={NotFound} />
         </Routes>
         <BsFooter></BsFooter>

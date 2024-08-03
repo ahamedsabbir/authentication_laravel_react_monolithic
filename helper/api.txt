@@ -1,0 +1,2 @@
+php artisan make:model Product --api -mc
+php artisan make:model Category --api -mc
