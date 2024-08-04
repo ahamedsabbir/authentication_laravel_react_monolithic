@@ -3,10 +3,12 @@ import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../reducers/reduxAuth';
+import { formatCart } from '../reducers/reduxCart';
 
 function BsNav() {
   const [categories, setCategories] = useState([]);
   const authState = useSelector(state => state.authentication)
+  const cartState = useSelector(state => state.cart)
   const dispatch = useDispatch();
   const logoutHandel = (e) => {
     e.preventDefault();
@@ -50,10 +52,13 @@ function BsNav() {
                 <ul className="dropdown-menu">
                   {categories.map((category) => (
                     <li className="nav-item" key={category.id}>
-                      <NavLink className="nav-link" aria-current="page" to={"/products/category/"+category.id}>{category.name}</NavLink>
+                      <NavLink className="nav-link" aria-current="page" to={"/products/category/" + category.id}>{category.name}</NavLink>
                     </li>
                   ))}
                 </ul>
+              </li>
+              <li>
+                <NavLink className="nav-link" aria-current="page" to="/counter">Counter</NavLink>
               </li>
             </ul>
             <ul className='d-flex navbar-nav'>
@@ -78,11 +83,17 @@ function BsNav() {
                   <ul className="dropdown-menu">
                     <li><NavLink className="dropdown-item" to="/profile">Profile</NavLink></li>
                     <li><NavLink className="dropdown-item" to="/dashboard">Dashboard</NavLink></li>
+                    <li><button className="dropdown-item" onClick={() => dispatch(formatCart())}>Cart Clear</button></li>
                     <li><a className="dropdown-item" onClick={logoutHandel}>Logout</a></li>
                   </ul>
                 </li>
               )}
 
+              <li>
+                <NavLink type="button" className="btn btn-primary" to={"/cart"}>
+                  <i className="fa-solid fa-cart-shopping"></i> <span className="badge text-bg-secondary">{cartState.length}</span>
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>

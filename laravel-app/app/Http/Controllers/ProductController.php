@@ -54,11 +54,11 @@ class ProductController extends Controller
     {
         //
     }
-	public function category($id)
+	public function category($cat)
     {
-        $product = Product::with('category')->where('category_id', $id)->get();
+        $products = Product::with('category')->where('category_id', $cat)->get();
         return response()->json([
-			'product' => $product,
+			'products' => $products,
 			'msg' => "data get."
 		]);
     }

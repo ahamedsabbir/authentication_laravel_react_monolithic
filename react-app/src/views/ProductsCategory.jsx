@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom';
-import { addCart } from '../reducers/reduxCart';
+import { Link, useParams } from 'react-router-dom';
 
 function Products() {
   const [products, setProducts] = useState([]);
-  const dispatch = useDispatch();
+  const { cat } = useParams();
   const getProducts = async () => {
     try {
       axios.defaults.baseURL = "http://localhost/authentication_laravel_react_monolithic/laravel-app/public/api"
-      const response = await axios.get('/products');
+      const response = await axios.get('/products/category/' + cat);
       setProducts(response.data.products);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
-  }
-  const cartHandeler = (e, product) => {
-    e.preventDefault();
-    //alert("Added to cart");
-    dispatch(addCart(product));
   }
   useEffect(() => {
     getProducts();
@@ -27,12 +20,11 @@ function Products() {
   return (
     <>
       <div className="container">
-        <h1>Products</h1>
         <div className="row">
           {products.map((product) => (
             <div className="col-md-4 mt-4" key={product.id}>
               <div className="card">
-                <img src={'/assets/img/no-image.jpg'} className="card-img-top" alt={product.name} />
+                <img src={'/assets/img/no-image.jpg'} className="card-img-top" alt={product.name}/>
                 <div className="card-body">
                   <h5 className="card-title">${product.price}</h5>
                   <h6 className="card-subtitle mb-2">{product.name}</h6>
@@ -40,9 +32,9 @@ function Products() {
                   <p className="card-text">{product.description}</p>
                 </div>
                 <div className="card-footer">
-                  <Link to={'/product/'+product.id} className="btn btn-primary"><i className="fa-solid fa-eye"></i></Link>
+                  <Link to={'/product/'+product.id} className="btn btn-primary">View Details</Link>
                   &nbsp;
-                  <button className="btn btn-primary" onClick={(e) => cartHandeler(e, product)}><i className="fa-solid fa-cart-plus"></i></button>
+                  <button className="btn btn-primary">Add to Cart</button>
                 </div>
               </div>
             </div>
