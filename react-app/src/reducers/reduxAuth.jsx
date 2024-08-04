@@ -32,7 +32,8 @@ export const reduxAuth = (state = AUTH_STATE, action) => {
                 user: action.payload.data.user,
                 token: action.payload.data.token,
                 role: action.payload.data.role,
-                auth: action.payload.data.auth
+                auth: action.payload.data.auth,
+                image: action.payload.data.image
             };
         case LOGOUT:
             return {
@@ -42,6 +43,7 @@ export const reduxAuth = (state = AUTH_STATE, action) => {
                 token: null,
                 role: null,
                 auth: null,
+                image: null
             };
         case REGISTER:
             return {
@@ -50,7 +52,8 @@ export const reduxAuth = (state = AUTH_STATE, action) => {
                 user: action.payload.data.user,
                 token: action.payload.data.token,
                 role: action.payload.data.role,
-                auth: action.payload.data.auth
+                auth: action.payload.data.auth,
+                image: action.payload.data.image
             };
         case UPDATE:
             return {
@@ -59,7 +62,8 @@ export const reduxAuth = (state = AUTH_STATE, action) => {
                 user: action.payload.data.user,
                 token: action.payload.data.token,
                 role: action.payload.data.role,
-                auth: action.payload.data.auth
+                auth: action.payload.data.auth,
+                image: action.payload.data.image
             };
         default:
             return state;

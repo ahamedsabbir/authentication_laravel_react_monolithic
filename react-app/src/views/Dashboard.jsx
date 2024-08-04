@@ -24,6 +24,7 @@ function Dashboard() {
     <>
     <h1>name: {userData.name}</h1>
     <h1>email: {userData.email}</h1>
+    <p>token: {authState.token}</p>
     </>
   )
 }

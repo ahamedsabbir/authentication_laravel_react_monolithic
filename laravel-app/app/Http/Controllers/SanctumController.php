@@ -70,11 +70,11 @@ class SanctumController extends Controller
             $imageName = time() . '.' . $request->image->extension();
             $request->image->storeAs('public/img', $imageName);
             $imageUrl = "img/" . $imageName;
+			$user->image = $imageUrl;
+			$user->save();
         }
-        $user->image = $imageUrl;
-		$user->save();
 		return response()->json([
-            'image' => $imageUrl,
+			'user' => $user,
             'msg' => "image upload"
         ]);
 	}

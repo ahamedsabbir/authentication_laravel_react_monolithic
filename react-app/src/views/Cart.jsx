@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { formatCart, removeCart } from '../reducers/reduxCart';
+import { NavLink } from 'react-router-dom';
 
 function Cart() {
     const [price, setPrice] = useState(0)
@@ -64,9 +65,7 @@ function Cart() {
                                         <span><strong>${price + price * 0.1}</strong></span>
                                     </li>
                                 </ul>
-                                <button type="button" className="btn btn-primary btn-lg btn-block">
-                                    Go to checkout
-                                </button>
+                                <NavLink type="button" className="btn btn-primary btn-lg btn-block" to={"/checkout"}>Checkout</NavLink>
                             </div>
                         </div>
                     </div>

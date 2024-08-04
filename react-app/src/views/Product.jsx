@@ -20,6 +20,7 @@ function Product() {
     return (
         <>
             <div className="container">
+                <h1>Product</h1>
                 <div className="row">
                     <div className="col-md-4 mt-4">
                         <div className="card">

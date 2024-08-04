@@ -16,7 +16,7 @@ function Register() {
       const response = await axios.post('/login', postData);
       const result = response.data;
       console.log(result.token);
-      dispatch(login({ id: result.user.id, user: result.user.name, token: result.token, role: 'user', auth: true }));
+      dispatch(login({ image: result.user.image, id: result.user.id, user: result.user.name, token: result.token, role: 'user', auth: true }));
       setTimeout(() => {
         window.location.href = '/dashboard';
       }, 1000);

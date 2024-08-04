@@ -83,6 +83,7 @@ function BsNav() {
                   <ul className="dropdown-menu">
                     <li><NavLink className="dropdown-item" to="/profile">Profile</NavLink></li>
                     <li><NavLink className="dropdown-item" to="/dashboard">Dashboard</NavLink></li>
+                    <li><NavLink className="dropdown-item" to="/checkout">Checkout</NavLink></li>
                     <li><button className="dropdown-item" onClick={() => dispatch(formatCart())}>Cart Clear</button></li>
                     <li><a className="dropdown-item" onClick={logoutHandel}>Logout</a></li>
                   </ul>

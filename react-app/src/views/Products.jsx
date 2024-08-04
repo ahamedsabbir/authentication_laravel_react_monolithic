@@ -6,8 +6,10 @@ import { addCart } from '../reducers/reduxCart';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const getProducts = async () => {
+    setLoading(true);
     try {
       axios.defaults.baseURL = "http://localhost/authentication_laravel_react_monolithic/laravel-app/public/api"
       const response = await axios.get('/products');
@@ -15,10 +17,10 @@ function Products() {
     } catch (error) {
       console.error('Error fetching products:', error);
     }
+    setLoading(false);
   }
   const cartHandeler = (e, product) => {
-    e.preventDefault();
-    //alert("Added to cart");
+    //e.preventDefault();
     dispatch(addCart(product));
   }
   useEffect(() => {
@@ -28,6 +30,7 @@ function Products() {
     <>
       <div className="container">
         <h1>Products</h1>
+        {loading && <div>Loading...</div>}
         <div className="row">
           {products.map((product) => (
             <div className="col-md-4 mt-4" key={product.id}>
